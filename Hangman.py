@@ -34,7 +34,7 @@ while True:
 
             print(printWord)
 
-            letterGuess = input("Input a letter:")
+            letterGuess = input("Input a letter: ")
 
             if (len(letterGuess) > 1) or (len(letterGuess) == 0):
                 print("Please, input a single letter.")
