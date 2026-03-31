@@ -1,4 +1,5 @@
 from random import randint
+import twl
 
 wins = 0
 losses = 0
@@ -14,7 +15,10 @@ while True:
 
         attempts = 8
 
-        wordList = ["python", "java", "swift", "javascript"]
+
+        wordList = list(twl.iterator())
+
+
         wordToGuess = wordList[randint(0, len(wordList) - 1)]
 
         for letter in wordToGuess:
@@ -58,6 +62,8 @@ while True:
                 if wordToGuessAsAList[position] == word[position]:
                     correctLetters += 1
 
+            print(lettersGuessed)
+
             if correctLetters == len(wordToGuessAsAList):
                 break
 
@@ -69,9 +75,14 @@ while True:
             wins += 1
         else:
             print("You lost!")
+            print(f"The word was {wordToGuess}!")
             losses += 1
+
     elif command == "exit":
         break
     elif command == "results":
+        print()
         print(f"You won: {wins} times.")
         print(f"You lost: {losses} times")
+
+    print()
