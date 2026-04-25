@@ -1,5 +1,5 @@
 from random import randint
-from WordGameFunctions import printWord
+import WordGameFunctions
 import twl
 
 wins = 0
@@ -27,7 +27,7 @@ while True:
         while attempts > 0:
             print()
             correctLetters = 0
-            printWord(word)
+            WordGameFunctions.printWord(word)
 
             letterGuess = input("Input a letter: ")
 
@@ -49,11 +49,9 @@ while True:
                 print("That letter doesn't appear in the word.")
                 attempts -= 1
 
-            for position in range(len(wordToGuessAsAList)):
-                if (wordToGuessAsAList[position] == letterGuess) and (word[position] != letterGuess):
-                    word.insert(position, letterGuess)
-                    word.pop(position + 1)
+            WordGameFunctions.letterChecker("HANGMAN", wordToGuessAsAList, word, letterGuess)
 
+            for position in range(len(wordToGuessAsAList)):
                 if wordToGuessAsAList[position] == word[position]:
                     correctLetters += 1
 
