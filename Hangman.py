@@ -4,6 +4,8 @@ import twl
 wins = 0
 losses = 0
 
+wordList = list(twl.iterator())
+
 print("H A N G M A N")
 
 while True:
@@ -14,10 +16,6 @@ while True:
         lettersGuessed = []
 
         attempts = 8
-
-
-        wordList = list(twl.iterator())
-
 
         wordToGuess = wordList[randint(0, len(wordList) - 1)]
 
