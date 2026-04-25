@@ -151,6 +151,14 @@ def iterator():
     '''
     return iter(_DAWG)
 
+def numberIterator(numberOfLetters):
+    maxWordList = list(iterator())
+    words = []
+    for word in maxWordList:
+        if len(word) == numberOfLetters:
+            words.append(word)
+    return words
+
 
 def children(prefix):
     '''

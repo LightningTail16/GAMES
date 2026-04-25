@@ -1,4 +1,5 @@
 from random import randint
+from WordGameFunctions import printWord
 import twl
 
 wins = 0
@@ -26,11 +27,7 @@ while True:
         while attempts > 0:
             print()
             correctLetters = 0
-            printWord = ""
-            for position in range(len(word)):
-                printWord += word[position]
-
-            print(printWord)
+            printWord(word)
 
             letterGuess = input("Input a letter: ")
 
