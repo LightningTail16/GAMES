@@ -2,16 +2,29 @@ from random import randint
 import WordGameFunctions
 import twl
 
-wordList = twl.numberIterator(5)
-
-
-
-
 
 while True:
     command = input('Type "play" to play the game and "exit" to quit: ')
 
     if command.lower() == "play":
+        numberOfLetters = 0
+        while (numberOfLetters < 2) or (numberOfLetters > 15):
+            print()
+            numberOfLetters = input("How many letters would you like each word to have? (2-15) ")
+            try:
+                numberOfLetters = int(numberOfLetters)
+            except ValueError:
+                print("That is not a number")
+                numberOfLetters = 0
+                continue
+            numberOfLetters = int(numberOfLetters)
+            if numberOfLetters < 2:
+                print("That is not enough letters")
+            elif numberOfLetters > 15:
+                print("That is too many letters")
+
+        wordList = twl.numberIterator(numberOfLetters)
+
         word = []
         wordToGuessAsAList = []
         wordGuessAsAList = []
@@ -55,6 +68,7 @@ while True:
                             correctButWrongLetters.append(wordGuessAsAList[i])
 
                     print(f"There are these letters in the word, but they are wrongly placed: {correctButWrongLetters}")
+                    print("Note: The amount of a single letter in this list does not show the number of this letter in the word")
 
                 wordGuessAsAList = []
                 correctButWrongLetters = []
