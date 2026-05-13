@@ -17,12 +17,22 @@ titleScreen = [
 
 creditsScreen = [
     [
-        sg.Text("Credits"),
+        sg.Text("Credits")
+    ],
+    [
         sg.Text("Hangman")
-    ]
+    ],
+    [
+        sg.Button("Back", key="back")
+    ],
 ]
 
-layout = [titleScreen]
+layout = [
+    [
+        sg.Column(titleScreen, key="titleScreen", visible=True),
+        sg.Column(creditsScreen, key="credits", visible=False),
+    ]
+]
 
 window = sg.Window("LightningTail's Game Library", layout)
 
@@ -31,8 +41,11 @@ while True:
     if event == sg.WIN_CLOSED or event == "exit":
         break
     elif event == "credits":
-        layout = [creditsScreen]
-        window["-OUT-"].update(creditsScreen)
+        window["titleScreen"].update(visible=False)
+        window["credits"].update(visible=True)
+    elif event == "back":
+        window["credits"].update(visible=False)
+        window["titleScreen"].update(visible=True)
 
 window.close()
 
