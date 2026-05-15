@@ -25,7 +25,7 @@ def makeGameScreen():
         [sg.Button("back", key="back")],
     ]
 
-def makeWindow(screen):
+def makeWindow(screen, location=None):
     if screen == "credits":
         layout = makeCreditsScreen()
     elif screen == "start":
@@ -33,7 +33,12 @@ def makeWindow(screen):
     else:
         layout = makeTitleScreen()
 
-    return sg.Window("LightningTail's Game Library", layout)
+    return sg.Window("LightningTail's Game Library", layout, location=location, finalize=True)
+
+def switchScreen(window, screen):
+    location = window.current_location()
+    window.close()
+    return makeWindow(screen, location)
 
 currentScreen = "title"
 window = makeWindow(currentScreen)
@@ -45,15 +50,15 @@ while True:
     elif event == "credits":
         window.close()
         currentScreen = "credits"
-        window = makeWindow(currentScreen)
+        window = switchScreen(window, currentScreen)
     elif event == "back":
         window.close()
         currentScreen = "title"
-        window = makeWindow(currentScreen)
+        window = switchScreen(window, currentScreen)
     elif event == "start":
         window.close()
         currentScreen = "start"
-        window = makeWindow(currentScreen)
+        window = switchScreen(window, currentScreen)
 
 window.close()
 
