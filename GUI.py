@@ -35,8 +35,12 @@ def makeWindow(screen, location=None):
 
     return sg.Window("LightningTail's Game Library", layout, location=location, finalize=True)
 
+def getWindowLocation(window):
+    window.TKroot.update_idletasks()
+    return (window.TKroot.winfo_x(), window.TKroot.winfo_y())
+
 def switchScreen(window, screen):
-    location = window.current_location()
+    location = getWindowLocation(window)
     window.close()
     return makeWindow(screen, location)
 
@@ -48,15 +52,12 @@ while True:
     if event == sg.WIN_CLOSED or event == "exit":
         break
     elif event == "credits":
-        window.close()
         currentScreen = "credits"
         window = switchScreen(window, currentScreen)
     elif event == "back":
-        window.close()
         currentScreen = "title"
         window = switchScreen(window, currentScreen)
     elif event == "start":
-        window.close()
         currentScreen = "start"
         window = switchScreen(window, currentScreen)
 
