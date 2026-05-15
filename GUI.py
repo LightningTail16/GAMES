@@ -33,8 +33,13 @@ def make_window(screen, location=None):
     )
 
 
+def get_window_location(window):
+    window.TKroot.update_idletasks()
+    return (window.TKroot.winfo_x(), window.TKroot.winfo_y())
+
+
 def switch_screen(window, screen):
-    location = window.current_location()
+    location = get_window_location(window)
     window.close()
     return make_window(screen, location)
 
