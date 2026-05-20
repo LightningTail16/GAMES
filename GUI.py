@@ -22,10 +22,10 @@ def makeGameScreen():
     return [
         [sg.Text("Play Game")],
         [sg.Button("Hangman", key="hangman")],
-        [sg.Button("back", key="back")],
+        [sg.Button("Back", key="back")],
     ]
 
-def makeWindow(screen, location=None):
+def makeWindow(screen, location=None, size=None):
     if screen == "credits":
         layout = makeCreditsScreen()
     elif screen == "start":
@@ -33,7 +33,22 @@ def makeWindow(screen, location=None):
     else:
         layout = makeTitleScreen()
 
-    return sg.Window("LightningTail's Game Library", layout, location=location, finalize=True)
+    windowArguments = {
+        "location": location,
+        "resizable": True,
+        "finalize": True,
+    }
+
+    if size is not None:
+        windowArguments["size"] = size
+
+    return sg.Window("LightningTail's Game Library", layout, **windowArguments)
+
+def applyWindowMinimumSize(window):
+    window.TKroot.update_idletasks()
+    minimumWidth = window.TKroot.winfo_reqwidth()
+    minimumHeight = window.TKroot.winfo_reqheight()
+    window.TKroot.minsize(minimumWidth, minimumHeight)
 
 def getWindowLocation(window):
     window.TKroot.update_idletasks()
@@ -41,11 +56,13 @@ def getWindowLocation(window):
 
 def switchScreen(window, screen):
     location = getWindowLocation(window)
+    size = window.size
     window.close()
-    return makeWindow(screen, location)
+    return makeWindow(screen, location, size)
 
 currentScreen = "title"
 window = makeWindow(currentScreen)
+applyWindowMinimumSize(window)
 
 while True:
     event, values = window.read()
@@ -53,13 +70,12 @@ while True:
         break
     elif event == "credits":
         currentScreen = "credits"
-        window = switchScreen(window, currentScreen)
     elif event == "back":
         currentScreen = "title"
-        window = switchScreen(window, currentScreen)
     elif event == "start":
         currentScreen = "start"
-        window = switchScreen(window, currentScreen)
+    window = switchScreen(window, currentScreen)
+    applyWindowMinimumSize(window)
 
 window.close()
 
