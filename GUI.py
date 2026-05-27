@@ -29,7 +29,7 @@ def makeGameScreen():
     ]
 
 
-def makeWindow(screen, location=None):
+def makeWindow(screen, location=None, size=None):
     if screen == "credits":
         layout = makeCreditsScreen()
     elif screen == "start":
@@ -37,7 +37,14 @@ def makeWindow(screen, location=None):
     else:
         layout = makeTitleScreen()
 
-    return sg.Window("LightningTail's Game Library", layout, location=location, finalize=True)
+    return sg.Window(
+        "LightningTail's Game Library",
+        layout,
+        location=location,
+        size=size,
+        resizable=True,
+        finalize=True,
+    )
 
 
 def getWindowLocation(window):
@@ -47,8 +54,9 @@ def getWindowLocation(window):
 
 def switchScreen(window, screen):
     location = getWindowLocation(window)
+    size = window.size
     window.close()
-    return makeWindow(screen, location)
+    return makeWindow(screen, location, size)
 
 
 currentScreen = "title"
