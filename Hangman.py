@@ -1,6 +1,17 @@
-from random import randint
+import random
 import WordGameFunctions
 import twl
+
+
+
+
+
+
+
+
+
+
+
 
 wins = 0
 losses = 0
@@ -18,7 +29,7 @@ while True:
 
         attempts = 8
 
-        wordToGuess = wordList[randint(0, len(wordList) - 1)]
+        wordToGuess = random.choice(wordList)
 
         for letter in wordToGuess:
             word.append("-")

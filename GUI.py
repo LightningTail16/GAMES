@@ -70,13 +70,15 @@ while True:
         break
     elif event == "credits":
         currentScreen = "credits"
+        window = switchScreen(window, currentScreen)
+        applyWindowMinimumSize(window)
     elif event == "back":
         currentScreen = "title"
+        window = switchScreen(window, currentScreen)
+        applyWindowMinimumSize(window)
     elif event == "start":
         currentScreen = "start"
-    window = switchScreen(window, currentScreen)
-    applyWindowMinimumSize(window)
+        window = switchScreen(window, currentScreen)
+        applyWindowMinimumSize(window)
 
 window.close()
-
-# https://docs.pysimplegui.com/en/latest/documentation/module/elements/button/
